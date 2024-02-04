@@ -1,0 +1,38 @@
+{
+	"id": 128785933,
+	"name": "[Broadband][Percentage][C-SEV1] WIFI_ERROR markers are trending",
+	"type": "composite",
+	"query": "128748526 && 128778189 && 128779671 && 130480974 && 130613846",
+	"message": "{{#is_alert}}---\n\n[Broadband] [Percentage] [C-SEV1] WIFI_ERROR markers are trending on {{devicename.name}} at {{last_triggered_at}} UTC\n\nTimeline here: https://dh-comcast.datadoghq.com/monitors/128748526?q=devicename%3A{{devicename.name}} \n\n---\n@slack-TPX-rdkb-alerts\n{{/is_alert}}",
+	"tags": [
+		"alert-category:marker",
+		"alert-metric:percentage",
+		"alert-name:sevalert",
+		"alert-platform:rdkb",
+		"alert-trigger:error",
+		"alert-type:composite",
+		"team:rdk"
+	],
+	"options": {
+		"escalation_message": "{{#is_renotify}}\n\n**This is a re-notification**; alert has been active since {{last_triggered_at}} UTC ({{triggered_duration_sec}} seconds ago)\n\n---\n{{/is_renotify}}",
+		"include_tags": true,
+		"new_host_delay": 300,
+		"notification_preset_name": "hide_all",
+		"notify_no_data": false,
+		"renotify_interval": 60,
+		"renotify_occurrences": 3,
+		"renotify_statuses": [
+			"no data",
+			"alert"
+		],
+		"require_full_window": false,
+		"timeout_h": 1,
+		"notify_audit": false,
+		"silenced": {
+			"*": null
+		},
+		"avalanche_window": 20
+	},
+	"priority": 1,
+	"restricted_roles": null
+}

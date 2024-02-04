@@ -1,0 +1,34 @@
+{
+	"id": 137146574,
+	"name": "[RDKB][Count] WIFI_ERROR markers are above the threshold",
+	"type": "query alert",
+	"query": "sum(last_30m):sum:rdk.WIFI_ERROR{platform:rdkb,!partner:sky* , !context:nonsev} by {devicename,partner,markername}.as_count().rollup(sum, 900) > 50",
+	"message": "threshold",
+	"tags": [
+		"alert-category:marker",
+		"alert-name:sevalert",
+		"alert-platform:rdkb",
+		"alert-trigger:error",
+		"alert-trigger:wifi-error",
+		"alert-type:threshold",
+		"env:prod",
+		"team:rdk"
+	],
+	"options": {
+		"include_tags": true,
+		"new_group_delay": 60,
+		"new_host_delay": 300,
+		"notification_preset_name": "hide_handles",
+		"notify_no_data": false,
+		"require_full_window": false,
+		"thresholds": {
+			"critical": 50
+		},
+		"timeout_h": 1,
+		"notify_audit": false,
+		"silenced": {},
+		"avalanche_window": 20
+	},
+	"priority": 3,
+	"restricted_roles": null
+}

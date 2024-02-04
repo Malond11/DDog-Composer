@@ -1,0 +1,39 @@
+{
+	"id": 137146101,
+	"name": "[RDKB] [SEV3] WIFI_ERROR markers are trending",
+	"type": "query alert",
+	"query": "avg(last_12h):anomalies(sum:rdk.WIFI_ERROR{platform:rdkb,!partner:sky* , !context:nonsev, ! partner:null} by {devicename,partner,markername}.as_count().rollup(sum, 900), 'agile', 3, direction='above', interval=120, alert_window='last_30m', count_default_zero='true', seasonality='weekly', timezone='utc') >= 1",
+	"message": "{{#is_alert}} [RDKB] WIFI_ERROR markers are trending{{/is_alert}}",
+	"tags": [
+		"alert-category:marker",
+		"alert-metric:count",
+		"alert-name:sevalert",
+		"alert-platform:rdkb",
+		"alert-trigger:error",
+		"alert-trigger:wifi-error",
+		"env:prod",
+		"team:rdk"
+	],
+	"options": {
+		"include_tags": true,
+		"new_group_delay": 60,
+		"new_host_delay": 300,
+		"notification_preset_name": "hide_handles",
+		"notify_no_data": false,
+		"require_full_window": true,
+		"threshold_windows": {
+			"recovery_window": "last_30m",
+			"trigger_window": "last_30m"
+		},
+		"thresholds": {
+			"critical": 1,
+			"critical_recovery": 0
+		},
+		"timeout_h": 1,
+		"notify_audit": false,
+		"silenced": {},
+		"avalanche_window": 20
+	},
+	"priority": 3,
+	"restricted_roles": null
+}
