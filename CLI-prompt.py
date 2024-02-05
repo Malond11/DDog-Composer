@@ -2,6 +2,9 @@ import os
 import textwrap
 
 def print_logo():
+    """
+    Prints the logo for the Ddog Monitor Composer.
+    """
     print("""
    
 ┳┓ ┓      ┏┓              
@@ -12,6 +15,17 @@ def print_logo():
     """)
 
 def get_valid_input(prompt, valid_responses, error_message):
+    """
+    Prompts the user for input and validates it against a list of valid responses.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+        valid_responses (list): A list of valid responses.
+        error_message (str): The error message to display when an invalid response is entered.
+
+    Returns:
+        str: The valid response entered by the user.
+    """
     while True:
         response = input(prompt).lower()
         if response in valid_responses:
@@ -20,6 +34,15 @@ def get_valid_input(prompt, valid_responses, error_message):
             print(error_message)
 
 def get_integer_input(prompt):
+    """
+    Prompts the user for input and validates it as an integer.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+
+    Returns:
+        int: The valid integer entered by the user.
+    """
     while True:
         try:
             return int(input(prompt))
@@ -27,6 +50,15 @@ def get_integer_input(prompt):
             print("Invalid input. Please enter a valid number.")
 
 def get_float_input(prompt):
+    """
+    Prompts the user for input and validates it as a float.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+
+    Returns:
+        float: The valid float entered by the user.
+    """
     while True:
         try:
             return float(input(prompt))
@@ -34,6 +66,17 @@ def get_float_input(prompt):
             print("Invalid input. Please enter a valid number.")
             
 def generate_output_content(i, type, custom_name):
+    """
+    Generates the output content for a Datadog monitor.
+
+    Args:
+        i (int): The index of the monitor.
+        type (str): The type of the monitor.
+        custom_name (str): The custom name of the monitor.
+
+    Returns:
+        str: The output content for the monitor.
+    """
     # Create the output content
     resource_name = f"{i}_{type}_{custom_name.replace(' ', '_')}"
     output_content = textwrap.dedent(f'''
@@ -45,6 +88,21 @@ def generate_output_content(i, type, custom_name):
     return output_content
 
 def generate_hcl_content(i, type, custom_name, query, message, tags, critical):
+    """
+    Generates the HCL content for a Datadog monitor.
+
+    Args:
+        i (int): The index of the monitor.
+        type (str): The type of the monitor.
+        custom_name (str): The custom name of the monitor.
+        query (str): The query of the monitor.
+        message (str): The message of the monitor.
+        tags (list): The tags of the monitor.
+        critical (float or None): The critical level of the monitor.
+
+    Returns:
+        str: The HCL content for the monitor.
+    """
     # Create the HCL content
     resource_name = f"{i}_{type}_{custom_name.replace(' ', '_')}"
     monitor_name = f"[SEV{i}][{type}] {custom_name}"
@@ -87,6 +145,9 @@ def generate_hcl_content(i, type, custom_name, query, message, tags, critical):
     return hcl_content
 
 def create_datadog_monitor():
+    """
+    Creates a Datadog monitor based on user input.
+    """
     print_logo()
     hcl_content = ""
     output_content = ""
@@ -158,17 +219,27 @@ def create_datadog_monitor():
                     }
                 }
             }
+            # Configure the Datadog provider
             provider "datadog" {
               api_key = var.datadog_api_key
               app_key = var.datadog_app_key
               api_url = var.datadog_host
             }
             """)
-            
+        with open('variables.tf', 'w') as f:
+            f.write("""
+            variable "datadog_api_key" {}
+            variable "datadog_app_key" {}
+            variable "datadog_host" {}
+            """)
     except IOError:
         print("Error writing to file.")
     else:
-        print(f'HCL files monitor.tf, outputs.tf, and provider.tf created.')
+        print(f'HCL files monitor.tf, outputs.tf, provider.tf, and variables.tf created.')
+
+
+if __name__ == "__main__":
+    create_datadog_monitor()
 
 if __name__ == "__main__":
     create_datadog_monitor()
