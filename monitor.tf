@@ -1,10 +1,10 @@
 
-resource "datadog_monitor" "1_anomaly_dfsfs" {
-    name        = "[SEV1][anomaly] dfsfs"
+resource "datadog_monitor" "1_anomaly_fsfsdfs" {
+    name        = "[SEV1][anomaly] fsfsdfs"
     type        = "query alert"
-    query       = "fsdfsf"
-    message     = "dadawd"
-    tags        = ['adsda']
+    query       = "fdfsdd"
+    message     = "sfdsfsd"
+    tags        = ['sfsff']
 
 monitor_thresholds {
     critical = 1.0
@@ -12,7 +12,7 @@ monitor_thresholds {
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -22,12 +22,12 @@ monitor_thresholds {
     priority = 1
 }
 
-resource "datadog_monitor" "2_anomaly_dfsfs" {
-    name        = "[SEV2][anomaly] dfsfs"
+resource "datadog_monitor" "2_anomaly_fsfsdfs" {
+    name        = "[SEV2][anomaly] fsfsdfs"
     type        = "query alert"
-    query       = "fsdfsf"
-    message     = "dadawd"
-    tags        = ['adsda']
+    query       = "fdfsdd"
+    message     = "sfdsfsd"
+    tags        = ['sfsff']
 
 monitor_thresholds {
     critical = 1.0
@@ -35,7 +35,7 @@ monitor_thresholds {
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -45,19 +45,19 @@ monitor_thresholds {
     priority = 2
 }
 
-resource "datadog_monitor" "1_threshold_dfsdf" {
-    name        = "[SEV1][threshold] dfsdf"
+resource "datadog_monitor" "1_threshold_asdad" {
+    name        = "[SEV1][threshold] asdad"
     type        = "query alert"
-    query       = "asdad"
-    message     = "adsasd"
-    tags        = ['sadsd']
+    query       = "adass"
+    message     = "asdasd"
+    tags        = ['adss']
 
 monitor_thresholds {
     critical = 3.0
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -67,19 +67,19 @@ monitor_thresholds {
     priority = 1
 }
 
-resource "datadog_monitor" "2_threshold_dfsdf" {
-    name        = "[SEV2][threshold] dfsdf"
+resource "datadog_monitor" "2_threshold_asdad" {
+    name        = "[SEV2][threshold] asdad"
     type        = "query alert"
-    query       = "asdad"
-    message     = "adsasd"
-    tags        = ['sadsd']
+    query       = "adass"
+    message     = "asdasd"
+    tags        = ['adss']
 
 monitor_thresholds {
     critical = 3.0
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -92,16 +92,16 @@ monitor_thresholds {
 resource "datadog_monitor" "1_change_asdasd" {
     name        = "[SEV1][change] asdasd"
     type        = "query alert"
-    query       = "adda"
-    message     = "adasda"
-    tags        = ['asdad']
+    query       = "adad"
+    message     = "adada"
+    tags        = ['add']
 
 monitor_thresholds {
-    critical = 3.0
+    critical = 5.0
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -114,16 +114,16 @@ monitor_thresholds {
 resource "datadog_monitor" "2_change_asdasd" {
     name        = "[SEV2][change] asdasd"
     type        = "query alert"
-    query       = "adda"
-    message     = "adasda"
-    tags        = ['asdad']
+    query       = "adad"
+    message     = "adada"
+    tags        = ['add']
 
 monitor_thresholds {
-    critical = 3.0
+    critical = 5.0
 }
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -133,15 +133,15 @@ monitor_thresholds {
     priority = 2
 }
 
-resource "datadog_monitor" "1_composite_asdsada" {
-    name        = "[SEV1][composite] asdsada"
+resource "datadog_monitor" "1_composite_asdasdas" {
+    name        = "[SEV1][composite] asdasdas"
     type        = "composite"
-    query       = "adad"
-    message     = "adad"
-    tags        = ['dadad']
+    query       = "dasdasd"
+    message     = "sadas"
+    tags        = ['asdasd']
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -151,15 +151,15 @@ resource "datadog_monitor" "1_composite_asdsada" {
     priority = 1
 }
 
-resource "datadog_monitor" "2_composite_asdsada" {
-    name        = "[SEV2][composite] asdsada"
+resource "datadog_monitor" "2_composite_asdasdas" {
+    name        = "[SEV2][composite] asdasdas"
     type        = "composite"
-    query       = "adad"
-    message     = "adad"
-    tags        = ['dadad']
+    query       = "dasdasd"
+    message     = "sadas"
+    tags        = ['asdasd']
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -169,15 +169,15 @@ resource "datadog_monitor" "2_composite_asdsada" {
     priority = 2
 }
 
-resource "datadog_monitor" "3_composite_asdsada" {
-    name        = "[SEV3][composite] asdsada"
+resource "datadog_monitor" "3_composite_asdasdas" {
+    name        = "[SEV3][composite] asdasdas"
     type        = "composite"
-    query       = "adad"
-    message     = "adad"
-    tags        = ['dadad']
+    query       = "dasdasd"
+    message     = "sadas"
+    tags        = ['asdasd']
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true
@@ -187,15 +187,15 @@ resource "datadog_monitor" "3_composite_asdsada" {
     priority = 3
 }
 
-resource "datadog_monitor" "4_composite_asdsada" {
-    name        = "[SEV4][composite] asdsada"
+resource "datadog_monitor" "4_composite_asdasdas" {
+    name        = "[SEV4][composite] asdasdas"
     type        = "composite"
-    query       = "adad"
-    message     = "adad"
-    tags        = ['dadad']
+    query       = "dasdasd"
+    message     = "sadas"
+    tags        = ['asdasd']
 
     notify_audit            = false
-    require_full_window     = false
+    require_full_window     = true
     notify_no_data          = false
     renotify_interval       = 0
     include_tags            = true

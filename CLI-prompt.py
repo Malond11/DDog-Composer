@@ -4,16 +4,11 @@ import textwrap
 def print_logo():
     print("""
    
-______    _               _____                                           
-|  _  \  | |             /  __ \                                          
-| | | |__| | ___   __ _  | /  \/ ___  _ __ ___  _ __   ___  ___  ___ _ __ 
-| | | / _` |/ _ \ / _` | | |    / _ \| '_ ` _ \| '_ \ / _ \/ __|/ _ \ '__|
-| |/ / (_| | (_) | (_| | | \__/\ (_) | | | | | | |_) | (_) \__ \  __/ |   
-|___/ \__,_|\___/ \__, |  \____/\___/|_| |_| |_| .__/ \___/|___/\___|_|   
-                   __/ |                       | |                        
-                  |___/                        |_|                        
-   
-   
+┳┓ ┓      ┏┓              
+┃┃┏┫┏┓┏┓  ┃ ┏┓┏┳┓┏┓┏┓┏┏┓┏┓
+┻┛┗┻┗┛┗┫  ┗┛┗┛┛┗┗┣┛┗┛┛┗ ┛ 
+       ┛         ┛        
+ 
     """)
 
 def get_valid_input(prompt, valid_responses, error_message):
@@ -37,6 +32,17 @@ def get_float_input(prompt):
             return float(input(prompt))
         except ValueError:
             print("Invalid input. Please enter a valid number.")
+            
+def generate_output_content(i, type, custom_name):
+    # Create the output content
+    resource_name = f"{i}_{type}_{custom_name.replace(' ', '_')}"
+    output_content = textwrap.dedent(f'''
+        output "{resource_name}" {{
+            value = "${{datadog_monitor.{resource_name}.id}}"
+        }}
+    ''')
+
+    return output_content
 
 def generate_hcl_content(i, type, custom_name, query, message, tags, critical):
     # Create the HCL content
@@ -83,6 +89,7 @@ def generate_hcl_content(i, type, custom_name, query, message, tags, critical):
 def create_datadog_monitor():
     print_logo()
     hcl_content = ""
+    output_content = ""
 
     while True:
         # Define valid monitor types
@@ -122,6 +129,7 @@ def create_datadog_monitor():
 
         for i in range(1, num_monitors + 1):
             hcl_content += generate_hcl_content(i, type, custom_name, query, message, tags, critical)
+            output_content += generate_output_content(i, type, custom_name)
 
         another_monitor = get_valid_input(
             "Do you want to create another monitor? (y/n): ",
@@ -134,14 +142,17 @@ def create_datadog_monitor():
 
         print("Monitor creation process completed.")
 
+
     # Write the HCL content to a file
     try:
         with open('monitor.tf', 'w') as f:
             f.write(hcl_content)
+        with open('outputs.tf', 'w') as f:
+            f.write(output_content)
     except IOError:
         print("Error writing to file.")
     else:
-        print(f'HCL file monitor.tf created.')
+        print(f'HCL files monitor.tf and outputs.tf created.')
 
 if __name__ == "__main__":
     create_datadog_monitor()
