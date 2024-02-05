@@ -149,10 +149,26 @@ def create_datadog_monitor():
             f.write(hcl_content)
         with open('outputs.tf', 'w') as f:
             f.write(output_content)
+        with open('provider.tf', 'w') as f:
+            f.write("""
+            terraform {
+                required_providers {
+                    datadog = {
+                        source = "Datadog/datadog"
+                    }
+                }
+            }
+            provider "datadog" {
+              api_key = var.datadog_api_key
+              app_key = var.datadog_app_key
+              api_url = var.datadog_host
+            }
+            """)
+            
     except IOError:
         print("Error writing to file.")
     else:
-        print(f'HCL files monitor.tf and outputs.tf created.')
+        print(f'HCL files monitor.tf, outputs.tf, and provider.tf created.')
 
 if __name__ == "__main__":
     create_datadog_monitor()
