@@ -67,7 +67,7 @@ def generate_hcl_content(i, type, custom_name, query, message, tags, critical):
 
     hcl_content += textwrap.dedent(f'''
             notify_audit            = false
-            require_full_window     = false
+            require_full_window     = true
             notify_no_data          = false
             renotify_interval       = 0
             include_tags            = true
